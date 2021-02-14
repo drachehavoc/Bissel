@@ -30,7 +30,8 @@ export class BisselAttribute<InformedType, T = AllowedType<InformedType>>  {
         this.#element = element;
         this.#type = this.#getType(value);
         this.#value = value;
-        this.#name = this.#qualifieName(qualifiedName);
+        // this.#name = this.#qualifieName(qualifiedName);
+        this.#name = qualifiedName;
         this.#node = document.createAttribute(this.#name);
         this.#helperMut = new MutationHelper(element, { attributeFilter: [this.#name] }, this.#chgCallback);
         this.set(value); // definido antes do listener para que não seja executado na primeira definição
@@ -54,18 +55,18 @@ export class BisselAttribute<InformedType, T = AllowedType<InformedType>>  {
         }
     }
 
-    #qualifieName = (propKey: PropertyKey) => {
-        if (typeof propKey === 'symbol') {
-            propKey = <string>propKey.description?.trim();
-            if (propKey === "")
-                throw "Ao defenir um Symbol como nome de um attributo HTML é necessário que o mesmo tenha uma descrição, para que seja usada como nome do attributo no elemento html.";
-        }
+    // #qualifieName = (propKey: PropertyKey) => {
+    //     if (typeof propKey === 'symbol') {
+    //         propKey = <string>propKey.description?.trim();
+    //         if (propKey === "")
+    //             throw "Ao defenir um Symbol como nome de um attributo HTML é necessário que o mesmo tenha uma descrição, para que seja usada como nome do attributo no elemento html.";
+    //     }
 
-        if (typeof propKey === 'number')
-            propKey = "num-" + propKey.toString();
+    //     if (typeof propKey === 'number')
+    //         propKey = "num-" + propKey.toString();
 
-        return <string>propKey.replace(/([A-Z])/g, "-$1").replace(/\s/g, '-').toLowerCase();
-    }
+    //     return <string>propKey.replace(/([A-Z])/g, "-$1").replace(/\s/g, '-').toLowerCase();
+    // }
 
     #toString = (v: T): string => {
         const type = this.#getType(v);
