@@ -1,4 +1,4 @@
-import { BisselPlaceholder } from "./BisselPlaceholder.js";
+import { BisselPlaceholder } from "./BisselPlaceholder";
 
 type GetterSetter = {
     set(value: any): any

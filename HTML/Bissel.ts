@@ -1,8 +1,8 @@
-import { BisselEvent } from "./BisselEvent.js";
-import { BisselChild } from "./BisselChild.js";
-import { BisselText } from "./BisselText.js";
-import { BisselAttribute } from "./BisselAttribute.js";
-import { BisselPlaceholder } from "./BisselPlaceholder.js";
+import { BisselEvent } from "./BisselEvent";
+import { BisselChild } from "./BisselChild";
+import { BisselText } from "./BisselText";
+import { BisselAttribute } from "./BisselAttribute";
+import { BisselPlaceholder } from "./BisselPlaceholder";
 
 type BisselProtected = {
     element: HTMLElement

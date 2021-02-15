@@ -1,6 +1,6 @@
-import { MutationHelper } from "../Utils/MutationHelper.js";
-import { Bissel, bisselProtected } from "./Bissel.js";
-import { BisselPlaceholderExpose } from "./BisselPlaceholderExpose.js";
+import { MutationHelper } from "../Utils/MutationHelper";
+import { Bissel, bisselProtected } from "./Bissel";
+import { BisselPlaceholderExpose } from "./BisselPlaceholderExpose";
 
 type TextCallback = (newValue: string, oldValue: string) => any
 

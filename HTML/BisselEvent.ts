@@ -1,4 +1,4 @@
-import { Bissel, bisselProtected } from "./Bissel.js";
+import { Bissel, bisselProtected } from "./Bissel";
 
 type listener<K extends keyof DocumentEventMap> = (ev: DocumentEventMap[K]) => any
 

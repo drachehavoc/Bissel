@@ -1,4 +1,4 @@
-import { Bissel, bisselProtected } from "./Bissel.js";
+import { Bissel, bisselProtected } from "./Bissel";
 
 export class BisselChild {
     #element: HTMLElement;
