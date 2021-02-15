@@ -1,4 +1,4 @@
-import { Bissel } from "../Bissel.js";
+import { Bissel } from "../Bissel";
 
 function cssText(cssText: string) {
     const bissel = new Bissel({}, 'style');
