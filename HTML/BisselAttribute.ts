@@ -1,6 +1,6 @@
-import { MutationHelper } from "../Utils/MutationHelper";
-import { Bissel, bisselProtected } from "./Bissel";
-import { BisselPlaceholderExpose } from "./BisselPlaceholderExpose";
+import { MutationHelper } from "../Utils/MutationHelper.js";
+import { Bissel, bisselProtected } from "./Bissel.js";
+import { BisselPlaceholderExpose } from "./BisselPlaceholderExpose.js";
 
 type AllowedType<T> =
     T extends Date ? Date :

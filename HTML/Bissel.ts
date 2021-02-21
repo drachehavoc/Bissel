@@ -1,11 +1,12 @@
-import { BisselEvent } from "./BisselEvent";
-import { BisselChild } from "./BisselChild";
-import { BisselText } from "./BisselText";
-import { BisselAttribute } from "./BisselAttribute";
-import { BisselPlaceholder } from "./BisselPlaceholder";
+import { BisselEvent } from "./BisselEvent.js";
+import { BisselChild } from "./BisselChild.js";
+import { BisselText } from "./BisselText.js";
+import { BisselAttribute } from "./BisselAttribute.js";
+import { BisselPlaceholder } from "./BisselPlaceholder.js";
 
 type BisselProtected = {
     element: HTMLElement
+    bissel: Bissel
 } & typeof configDefaults
 
 type BisselConfig = {
@@ -40,7 +41,7 @@ export const bisselProtected: Map<object, BisselProtected> = new Map();
 
 export class Bissel<T extends keyof HTMLElementTagNameMap = any>{
     #target: object;
-    #element: HTMLElement;
+    #element: HTMLElementTagNameMap[T];
 
     constructor(
         target: object,
@@ -53,7 +54,11 @@ export class Bissel<T extends keyof HTMLElementTagNameMap = any>{
         const proto = Object.getPrototypeOf(target);
         const element = this.#element = document.createElement(tagName);
         Object.setPrototypeOf(target, new Proxy(proto, { get, set }))
-        bisselProtected.set(target, { element, ...Object.assign({}, configDefaults, config) });
+        bisselProtected.set(target, {
+            element,
+            bissel: this,
+            ...Object.assign({}, configDefaults, config)
+        });
     }
 
     #factoryPlaceHolder = <R, A extends any[]>(ctor: { new(omitFirst: any, ...a: A): R }): (...a: A) => R => (...a) => new ctor(this, ...a) as unknown as R;

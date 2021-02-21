@@ -1,11 +1,14 @@
-import { Bissel, bisselProtected } from "./Bissel";
+import { Bissel, bisselProtected } from "./Bissel.js";
 
-type listener<K extends keyof DocumentEventMap> = (ev: DocumentEventMap[K]) => any
+type listener<K> =
+    K extends keyof DocumentEventMap ? (ev: DocumentEventMap[K]) => any
+    : K extends string ? (ev: Event) => any
+    : never
 
-export class BisselEvent<K extends keyof DocumentEventMap> {
+export class BisselEvent<K extends keyof DocumentEventMap | string> {
     #element: HTMLElement;
     #listener: listener<any>;
-    #type: keyof DocumentEventMap;
+    #type: keyof DocumentEventMap | string;
     #options: boolean | AddEventListenerOptions;
     #enabled: boolean = true;
 
@@ -20,7 +23,7 @@ export class BisselEvent<K extends keyof DocumentEventMap> {
         this.#element = element;
         this.#type = type;
         this.#options = options;
-        this.#listener = (...a) => this.#enabled ? userListener(...a) : void 0;
+        this.#listener = (...a: any[]) => this.#enabled ? userListener(...a) : void 0;
         if ((autoAttach && autoAttach == true) ||
             (autoAttach && autoAttach.event))
             this.attach();

@@ -1,4 +1,4 @@
-import { Bissel } from "../Bissel";
+import { Bissel } from "../Bissel.js";
 
 function cssText(cssText: string) {
     const bissel = new Bissel({}, 'style');
@@ -8,11 +8,11 @@ function cssText(cssText: string) {
     return bissel.element;
 }
 
-function cssLink(cssPath: string) {
+function cssLink(path: string) {
     const bissel = new Bissel({}, 'link');
     bissel.attribute("rel", "stylesheet");
     bissel.attribute("type", "text/css");
-    bissel.attribute("href", cssPath);
+    bissel.attribute("href", path);
     return bissel.element;
 }
 

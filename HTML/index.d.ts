@@ -1,1 +1,0 @@
-export type Constructor<T extends object = {}> = new (...a: any[]) => T
