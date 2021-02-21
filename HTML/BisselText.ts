@@ -5,6 +5,7 @@ import { BisselPlaceholderExpose } from "./BisselPlaceholderExpose.js";
 type TextCallback = (newValue: string, oldValue: string) => any
 
 export class BisselText {
+    #bissel: Bissel;
     #element: HTMLElement;
     #node: Text;
     #value: string;
@@ -21,6 +22,7 @@ export class BisselText {
         listener?: TextCallback
     ) {
         const { element, autoAttach } = bisselProtected.get(bissel.target)!;
+        this.#bissel = bissel;
         this.#element = element;
         this.#value = content;
         this.#node = document.createTextNode(this.#value);
@@ -36,6 +38,10 @@ export class BisselText {
         if (this.#listener)
             this.#listener(value, this.#value);
         this.#value = value;
+    }
+
+    get target() {
+        return this.#bissel.target;
     }
 
     expose(get: boolean = true, set: boolean = true) {
