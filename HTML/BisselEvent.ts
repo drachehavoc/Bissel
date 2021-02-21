@@ -6,6 +6,7 @@ type listener<K> =
     : never
 
 export class BisselEvent<K extends keyof DocumentEventMap | string> {
+    #bissel: Bissel;
     #element: HTMLElement;
     #listener: listener<any>;
     #type: keyof DocumentEventMap | string;
@@ -20,6 +21,7 @@ export class BisselEvent<K extends keyof DocumentEventMap | string> {
     ) {
         const { element, autoAttach } = bisselProtected.get(bissel.target)!;
         const userListener = listener.bind(bissel.target);
+        this.#bissel = bissel;
         this.#element = element;
         this.#type = type;
         this.#options = options;
@@ -27,6 +29,10 @@ export class BisselEvent<K extends keyof DocumentEventMap | string> {
         if ((autoAttach && autoAttach == true) ||
             (autoAttach && autoAttach.event))
             this.attach();
+    }
+    
+    get target() {
+        return this.#bissel.target;
     }
 
     attach() {

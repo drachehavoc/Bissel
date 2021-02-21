@@ -12,6 +12,7 @@ type AllowedType<T> =
 type AttributeCallback<T> = (newValue: T, oldValue: T) => any
 
 export class BisselAttribute<InformedType, T = AllowedType<InformedType>>  {
+    #bissel: Bissel;
     #element: HTMLElement;
     #name: string;
     #type: string;
@@ -27,6 +28,7 @@ export class BisselAttribute<InformedType, T = AllowedType<InformedType>>  {
         listener?: AttributeCallback<T>
     ) {
         const { element, autoAttach } = bisselProtected.get(bissel.target)!;
+        this.#bissel = bissel;
         this.#element = element;
         this.#type = this.#getType(value);
         this.#value = value;
@@ -94,6 +96,10 @@ export class BisselAttribute<InformedType, T = AllowedType<InformedType>>  {
             return parseFloat(v);
 
         return v;
+    }
+
+    get target() {
+        return this.#bissel.target;
     }
 
     expose(get: boolean = true, set: boolean = true) {
